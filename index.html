@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>AZoom Car Rental</title>
+        <link rel="stylesheet" href="style.css">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+    </head>
+    <body>
+        <!-- HEADER section-->
+        <section class="header">
+            <nav>
+                <a href="index.html"><img src="images/logo.png"></a>
+                <div class="nav-links" id="navLinks">
+                    <i class="fa fa-times" onclick="hideMenu()"></i>
+                    <ul>
+                        <li><a href="#home">HOME</a></li>
+                        <li><a href="#cars">CARS</a></li>
+                        <li><a href="#rates">RATES</a></li>
+                        <li><a href="#return">RETURN POLICY</a></li>
+                        <li><a href="#damage">DAMAGE POLICY</a></li>
+                        <li><a href="#about">ABOUT</a></li>
+                        <li><a href="#contactus">CONTACT</a></li>
+                    </ul>
+                </div>
+
+                <i class="fa fa-bars" onclick="showMenu()"></i>
+            </nav>            
+        </section>
+
+        <!-- section for HOME-->
+        <section class="home" id="home">
+            <div class="text-box">
+                <h1>
+                    <span>Need</span><span class="highlight-a"> A</span> 
+                    <span>ride?</span><span class="highlight-zoom"> Zoom</span><span> on.</span>
+                </h1>
+                    <p><span class="highlight-azoom">AZoom</span> provides quick services and high effiency.</p>
+            </div>
+
+            <div class="button">
+                <button id="reservenow-btn">Reserve Now</button>
+            </div>
+
+            <div class="popup">
+                <div class="close-btn">&times;</div>
+                <!--first form-->
+                <div class="form" id="form1">
+                    <h3>Reservation</h3>
+                    <div class="form-element">
+                        <label for="cartype">Car type</label>
+                        <select name="cartype" id="cartype">
+                            <option value="motorcar">motorcar</option>
+                            <option value="car (5 seater)">car (5 seater)</option>
+                            <option value="car (7 seater)">car (7 seater)</option>
+                            <option value="deliver van">deliver van</option>
+                            <option value="mini bus">mini bus</option>
+                            <option value="coach bus">coach bus</option>
+                        </select>
+
+                        <label for="startdate">From:</label>
+                        <input type="date" id="startdate" name="startdate">
+                        <label for="enddate">To:</label>
+                        <input type="date" id="enddate" name="enddate">
+
+                        <label for="collection">Collection</label>
+                        <select name="location" id="location">
+                            <option value="Main branch - town, singapore 123456">Main branch - town, singapore 123456</option>
+                            <option value="Second branch - town, singapore 654321">Second branch - town, singapore 654321</option>
+                        </select>
+                    </div>
+
+                    <div class="form-element">
+                        <button id="reserve-now-btn">Reserve Now</button>
+                    </div>
+                </div>
+
+                <!--second form-->
+                <div class="form" id="form2" style="display: none;">
+                    <h3>Personal Details</h3>
+                    <div class="form-element">
+                        <div class="form-element">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" placeholder="Enter name">
+                        </div>
+    
+                        <div class="form-element">
+                            <label for="email">Email</label>
+                            <input type="text" id="email" placeholder="Enter email">
+                        </div>
+    
+                        <div class="form-element">
+                            <label for="contact">Contact</label>
+                            <input type="text" id="contact" placeholder="Contact no.">
+                        </div>
+    
+                        <div class="form-element">
+                            <input type="checkbox" id="remember-me" name="remeber-me">
+                            <label for="remember-me">Remember me</label>
+                        </div>
+                    </div>
+
+                    <div class="form-element">
+                        <button id="next-btn">Next</button>
+                    </div>
+                </div>
+
+                <!--third form-->
+                <div class="form" id="form3" style="display: none;">
+                    <h3>Payment Details</h3>
+                    <div class="form-element">
+                        <div class="form-element">
+                            <label for="cardholdername">Card holder name:</label>
+                            <input type="text" id="cardholdername" placeholder="Enter name">
+                        </div>
+    
+                        <div class="form-element">
+                            <label for="cardnumber">Card number:</label>
+                            <input type="text" id="cardnumber" placeholder="XXXX XXXX XXXX XXXX">
+                        </div>
+    
+                        <div class="form-element-container">
+                            <div class="form-element">
+                                <label for="cvc">CVC:</label>
+                                <input type="text" id="cvc" placeholder="XXX">
+                            </div>
+                            
+                            <div class="form-element">
+                                <label for="expirydate">expiry date:</label>
+                                <input type="text" id="expirydate" placeholder="MM/YY">
+                            </div>
+                        </div>
+
+                        <div class="form-element">
+                            <input type="checkbox" id="remember-me">
+                            <label for="remember-me">Remember me</label>
+                        </div>
+
+                        <div class="form-element">
+                            <button id="confirm-btn" onclick="closeForm()">Confirm</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!--forth form-->
+                <div class="form4" id="form4" style="display: none;">
+                    <h3>Booking Confirm!</h3>
+                    <div class="form-element">
+                        <div class="form-row">
+                            <label for="name">Name:</label>
+                            <span id="confirm-name"></span>
+                        </div>
+                        <div class="form-row">
+                            <label for="contact">Contact:</label>
+                            <span id="confirm-contact"></span>
+                        </div>
+                        <div class="form-row">
+                            <label for="cartype">Car type:</label>
+                            <span id="confirm-cartype"></span>
+                        </div>
+                        <div class="form-row">
+                            <label for="startdate">From:</label>
+                            <span id="confirm-startdate"></span>
+                        </div>
+                        <div class="form-row">
+                            <label for="enddate">To:</label>
+                            <span id="confirm-enddate"></span>
+                        </div>
+                        <div class="form-row">
+                            <label for="location">Collection:</label>
+                            <span id="confirm-location"></span>
+                        </div>
+                    </div>
+                </div>
+        </section>
+
+
+        <!-- section for CARS-->
+        <section class="cars" id="cars">
+            <h1> Cars we offer</h1>
+
+            <div class="row">
+                <div class="car-col">
+                    <img src="images/car1.jpg" alt="car 1">
+                    <h3>electric motorcar</h3>
+                    <p>pax: 1-2</p>
+                </div>
+
+                <div class="car-col">
+                    <img src="images/car2.jpeg" alr="car2">
+                    <h3>electric car</h3>
+                    <p>pax: 1-5</p>
+                </div>
+
+                <div class="car-col">
+                    <img src="images/car3.jpeg" alt="car3">
+                    <h3>electric car</h3>
+                    <p>pax: 1-7</p>
+                </div>
+
+                <div class="car-col">
+                    <img src="images/car4.jpeg" alt="car4">
+                    <h3>electric delivery van</h3>
+                    <p>pax: 1-2 </br> with cargo space</p>
+                </div>
+
+                <div class="car-col">
+                    <img src="images/car5.jpeg" alt="car5">
+                    <h3>electric mini bus</h3>
+                    <p>pax: 1-20</p>
+                </div>
+
+                <div class="car-col">
+                    <img src="images/car6.jpeg" alt="car6">
+                    <h3>electric coach bus</h3>
+                    <p>pax: 1-40</p>
+                </div>
+            </div>            
+        </section>
+
+        <!--section for RATES-->
+        <section class="rates" id="rates">
+            <h1>Our rates</h1>
+            <p>Only pay for the duration of the rental period.</p>
+
+            <!--toggle button for rates-->
+            <div class="form-box">
+                <div class="button-box">
+                    <div id="btn"></div>
+                    <button type="button" class="toggle-btn" onclick="showDaily()"><strong>Daily</strong></button>
+                    <button type="button" class="toggle-btn" onclick="showWeekly()"><strong>Weekly</strong></button>
+                    <button type="button" class="toggle-btn" onclick="showMonthly()"><strong>Monthly</strong></button>
+                </div>
+            </div>
+
+            <!--content section for each toggle button-->
+            <div id="daily-rates" class="content" style="display: block;">
+                <!--swipe effect-->
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <img src="images/car1.jpg" alt="bike">
+                            <h4>Time charge</h4>
+                            <p>off-peak         <strong>$6/hr</strong></p>
+                            <p>peak             <strong>$10/hr</strong></p>
+                            <p>Mileage charge   <strong>$0.37/km</strong></p>
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="images/car2.jpeg" alt="car2">
+                            <h4>Time charge</h4>
+                            <p>off-peak         <strong>$8/hr</strong></p>
+                            <p>peak             <strong>$12/hr</strong></p>
+                            <p>Mileage charge   <strong>$0.43/km</strong></p>
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="images/car3.jpeg" alt="car3">
+                            <h4>Time charge</h4>
+                            <p>off-peak         <strong>$9/hr</strong></p>
+                            <p>peak             <strong>$13/hr</strong></p>
+                            <p>Mileage charge   <strong>$0.48/km</strong></p>
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="images/car4.jpeg" alt="car4">
+                            <h4>Time charge</h4>
+                            <p>off-peak         <strong>$30/hr</strong></p>
+                            <p>peak             <strong>$50/hr</strong></p>
+                            <p>Mileage charge   <strong>$3/km</strong></p>
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="images/car5.jpeg" alt="car5">
+                            <h4>Time charge</h4>
+                            <p>off-peak         <strong>$30/hr</strong></p>
+                            <p>peak             <strong>$50/hr</strong></p>
+                            <p>Mileage charge   <strong>$3/km</strong></p>
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="images/car6.jpeg" alt="car6">
+                            <h4>Time charge</h4>
+                            <p>off-peak         <strong>$68/hr</strong></p>
+                            <p>peak             <strong>$100/hr</strong></p>
+                            <p>Mileage charge   <strong>$8/km</strong></p>
+                        </div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                </div>  
+            </div>
+
+            <div id="weekly-rates" class="content" style="display: none;">
+                <!--swipe effect-->
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <img src="images/car1.jpg" alt="bike">
+                            <h4>Time charge</h4>
+                            <p>rate             <strong>$300/week</strong></p>
+                            <p>Mileage charge   <strong>$0.37/km</strong></p>
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="images/car2.jpeg" alt="car2">
+                            <h4>Time charge</h4>
+                            <p>rate             <strong>$450/week</strong></p>
+                            <p>Mileage charge   <strong>$0.43/km</strong></p>
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="images/car3.jpeg" alt="car3">
+                            <h4>Time charge</h4>
+                            <p>rate             <strong>$500/week</strong></p>
+                            <p>Mileage charge   <strong>$0.48/km</strong></p>
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="images/car4.jpeg" alt="car4">
+                            <h4>Time charge</h4>
+                            <p>rate             <strong>$680/week</strong></p>
+                            <p>Mileage charge   <strong>$3/km</strong></p>
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="images/car5.jpeg" alt="car5">
+                            <h4>Time charge</h4>
+                            <p>rate             <strong>$680/week</strong></p>
+                            <p>Mileage charge   <strong>$3/km</strong></p>
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="images/car6.jpeg" alt="car6">
+                            <h4>Time charge</h4>
+                            <p>rate             <strong>$1400/week</strong></p>
+                            <p>Mileage charge   <strong>$8/km</strong></p>
+                        </div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                </div>  
+            </div>
+
+            <div id="monthly-rates" class="content" style="display: none;">
+                <!--swipe effect-->
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <img src="images/car1.jpg" alt="bike">
+                            <h4>Time charge</h4>
+                            <p>rate             <strong>$8000/month</strong></p>
+                            <p>Mileage charge   <strong>$0.37/km</strong></p>
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="images/car2.jpeg" alt="car2">
+                            <h4>Time charge</h4>
+                            <p>rate             <strong>$12000/month</strong></p>
+                            <p>Mileage charge   <strong>$0.43/km</strong></p>
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="images/car3.jpeg" alt="car3">
+                            <h4>Time charge</h4>
+                            <p>rate             <strong>$14500/month</strong></p>
+                            <p>Mileage charge   <strong>$0.48/km</strong></p>
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="images/car4.jpeg" alt="car4">
+                            <h4>Time charge</h4>
+                            <p>rate             <strong>$20000/month</strong></p>
+                            <p>Mileage charge   <strong>$3/km</strong></p>
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="images/car5.jpeg" alt="car5">
+                            <h4>Time charge</h4>
+                            <p>rate             <strong>$2000/month</strong></p>
+                            <p>Mileage charge   <strong>$3/km</strong></p>
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="images/car6.jpeg" alt="car6">
+                            <h4>Time charge</h4>
+                            <p>rate             <strong>$40000/month</strong></p>
+                            <p>Mileage charge   <strong>$8/km</strong></p>
+                        </div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+            </div>
+        </section>
+
+        <!-- section for RETURN-->
+        <section class="return" id="return">
+            <h1>RETURN POLICY</h1>
+            <p>To ensure a smooth return process, please return the vehicle only at the 
+                designated car park. These car park is equipped with designated electric 
+                vehicle charging stations, making it convenient for you to recharge the vehicle before returning it. 
+                Thank you for your cooperation! </br></br>
+            </p>
+
+            <p><strong>Designated carpark for motorbikes and cars - any sheltered carpark near you</strong></p>
+            <p><strong>Designated carpark for coach bus only - any open space carpark</strong></p>
+        </section>
+
+        <!-- section for DAMAGE POLICY-->
+        <section class="damage" id="damage">
+            <h1>DAMAGE POLICY</h1>
+            <p>Our employee will be inspecting the cars after each rental period ends. Upon finding 
+                any damages on our cars, we will be charging a damage fees from the customer depending on cases.
+                Please take good care of AZoom's car! Enjoy your ride and have a safe trip!
+            </br></br>
+            </p>
+        </section>
+
+        <!-- section for ABOUT-->
+        <section class="about" id="about">
+            <h1>ABOUT</h1>
+            <p>AZoom car rental specializes in offering elecric cars for our 
+                environmentally conscious users, with a commitment to sustainability.
+                Our fleet ranges from small cars for personal use to larger vehicles for group travel, 
+                catering to variety needs without compromising on eco-friendliness.
+            </p>
+            <p><strong>Our Mission:</strong> </br>10% of our profit goes directly into planting trees to
+            help reduce carbon emission and support global reforestation efforts. By choosing AZoom, you are 
+        also choosing for a greener planet.</p>
+        </section>
+
+        <!-- section for CONTACT-->
+        <div class="contact-form" id="contactus">
+            <h2>Contact us here</h2>
+            <form id="contact-form">
+                <div class="form-element-contact">
+                    <textarea id="message" placeholder="Contact us anytime! Our hotline service operates 24/7 and we are here to help! Please send us your enquiry." rows="10" required></textarea>
+                </div>
+                <button type="submit" class="contact-btn">Send Message</button>
+            </form>     
+            <div id="userResponse" style="display: none;"></div>       
+        </section>
+
+
+        <!-- JavaScript for toggling the menubar-->
+        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+        <script>
+            var navLinks = document.getElementById("navLinks");
+
+            function showMenu() {
+                navLinks.style.right = "0";
+            }
+
+            function hideMenu() {
+                navLinks.style.right = "-200px";
+            }
+
+            // store form data
+            let carType, startDate, endDate, collectionLocation, userName, userEmail, userContact, cardHolderName, cardNumber, cvc, expiryDate;
+
+            // upon clicking on reserve now btn, form 1 appear
+            document.querySelector("#reservenow-btn").addEventListener("click", function() {
+                document.querySelector(".popup").classList.add("active");
+            });
+
+            // change to form2
+            document.querySelector("#reserve-now-btn").addEventListener("click", function(e) {
+                e.preventDefault();
+                carType = document.getElementById("cartype").value;
+                startDate = document.getElementById("startdate").value;
+                endDate = document.getElementById("enddate").value;
+                collectionLocation = document.getElementById("location").value;
+                
+                document.getElementById("form1").style.display = "none";
+                document.getElementById("form2").style.display = "block";
+            });
+
+            // to form3
+            document.querySelector("#next-btn").addEventListener("click", function(e) {
+                e.preventDefault();
+                userName = document.getElementById("name").value;
+                userEmail = document.getElementById("email").value;
+                userContact = document.getElementById("contact").value;
+                
+                document.getElementById("form2").style.display = "none";
+                document.getElementById("form3").style.display = "block";
+            });
+
+            // to form4
+            document.querySelector("#confirm-btn").addEventListener("click", function(e) {
+                e.preventDefault();
+                cardHolderName = document.getElementById("cardholdername").value;
+                cardNumber = document.getElementById("cardnumber").value;
+                cvc = document.getElementById("cvc").value;
+                expiryDate = document.getElementById("expirydate").value;
+
+                // display user input in form4
+                document.getElementById("form3").style.display = "none";
+                document.getElementById("form4").style.display = "block";
+
+                document.getElementById("confirm-name").textContent = userName;
+                document.getElementById("confirm-contact").textContent = userContact;
+                document.getElementById("confirm-cartype").textContent = carType;
+                document.getElementById("confirm-startdate").textContent = startDate;
+                document.getElementById("confirm-enddate").textContent = endDate;
+                document.getElementById("confirm-location").textContent = collectionLocation;
+            });
+
+            // close form
+            document.querySelector(".popup .close-btn").addEventListener("click", function() {
+                document.getElementById("form1").style.display = "block";
+                document.getElementById("form2").style.display = "none";
+                document.getElementById("form3").style.display = "none";
+                document.getElementById("form4").style.display = "none";
+                document.querySelector(".popup").classList.remove("active");
+            });
+
+
+            // rates toggle button
+            function showDaily() {
+                btn.style.left = '0'
+
+                document.getElementById('daily-rates').style.display = 'block';
+                document.getElementById('weekly-rates').style.display = 'none';
+                document.getElementById('monthly-rates').style.display = 'none';
+            }
+            function showWeekly() {
+                btn.style.left = '150px'
+
+                document.getElementById('daily-rates').style.display = 'none';
+                document.getElementById('weekly-rates').style.display = 'block';
+                document.getElementById('monthly-rates').style.display = 'none';
+            }
+            function showMonthly() {
+                btn.style.left = "300px"
+
+                document.getElementById('daily-rates').style.display = 'none';
+                document.getElementById('weekly-rates').style.display = 'none';
+                document.getElementById('monthly-rates').style.display = 'block';
+            }
+
+
+            var swiper = new Swiper('.swiper-container', {
+                loop: true,
+                slidesPerView: 2, 
+                spaceBetween: 50, 
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+            });
+
+            document.getElementById("contact-form").addEventListener("submit", function(e){
+                e.preventDefault();
+
+                const userResponse = document.getElementById("userResponse");
+                userResponse.style.display = "block";
+
+                userResponse.textContent = "Thank you for contacting us, we will get back to you soon.";
+
+            });
+
+            
+
+            
+            
+        </script>
+
+
+
+    </body>
+</html>
